@@ -1,12 +1,7 @@
-import PageContent from "~/components/PageContent";
 import "./App.css";
 
 function App() {
-  return (
-    <main>
-      <PageContent>Options</PageContent>
-    </main>
-  );
+  return <main>Options</main>;
 }
 
 export default App;

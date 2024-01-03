@@ -3,10 +3,10 @@ import pkg from "../package.json";
 const manifest = {
   action: {
     default_icon: {
-      16: `icons/icon-dev.ico`,
-      19: `icons/icon-dev.ico`,
-      48: `icons/icon-dev.ico`,
-      128: `icons/icon-dev.ico`,
+      16: `icons/icon.png`,
+      19: `icons/icon.png`,
+      48: `icons/icon.png`,
+      128: `icons/icon.png`,
     },
     default_popup: "src/entries/popup/index.html",
   },
@@ -21,10 +21,10 @@ const manifest = {
   ],
   host_permissions: ["*://*/*"],
   icons: {
-    16: `icons/icon-dev.ico`,
-    19: `icons/icon-dev.ico`,
-    48: `icons/icon-dev.ico`,
-    128: `icons/icon-dev.ico`,
+    16: `icons/icon.png`,
+    19: `icons/icon.png`,
+    48: `icons/icon.png`,
+    128: `icons/icon.png`,
   },
   options_ui: {
     page: "src/entries/options/index.html",
