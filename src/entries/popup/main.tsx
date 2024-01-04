@@ -1,14 +1,18 @@
+import "../enableDevHmr";
+
 import { LensConfig, LensProvider, production } from "@lens-protocol/react-web";
 import { bindings as wagmiBindings } from "@lens-protocol/wagmi";
 import React from "react";
 import ReactDOM from "react-dom/client";
+import { RouterProvider } from "react-router";
+import { createHashRouter } from "react-router-dom";
 import { WagmiConfig, configureChains, createConfig } from "wagmi";
 import { polygon } from "wagmi/chains";
 import { InjectedConnector } from "wagmi/connectors/injected";
 import { publicProvider } from "wagmi/providers/public";
 import "../../index.css";
-import "../enableDevHmr";
 import App from "./App";
+import Publication from "./publication";
 
 const { publicClient, webSocketPublicClient } = configureChains(
   [polygon],
@@ -33,24 +37,23 @@ const lensConfig: LensConfig = {
   environment: production,
 };
 
-// const router = createHashRouter([
-//   {
-//     path: "/",
-//     element: <App />,
-//   },
-//   {
-//     path: "/comments/:postId",
-//     element: <Comment />,
-//   },
-// ]);
+const router = createHashRouter([
+  {
+    path: "/",
+    element: <App />,
+  },
+  {
+    path: "/publication/:id",
+    element: <Publication />,
+  },
+]);
 
 ReactDOM.createRoot(document.getElementById("app") as HTMLElement).render(
   <React.StrictMode>
     <WagmiConfig config={config}>
       <LensProvider config={lensConfig}>
-        <App />
+        <RouterProvider router={router} />
       </LensProvider>
     </WagmiConfig>
-    {/* <RouterProvider router={router} /> */}
   </React.StrictMode>
 );

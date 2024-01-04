@@ -1,22 +1,21 @@
 import { Separator } from "@/components/ui/separator";
+import { LimitType } from "@lens-protocol/react";
 import {
-  ExplorePublicationType,
-  ExplorePublicationsOrderByType,
-  LimitType,
-  useExplorePublications,
-} from "@lens-protocol/react";
-import { Post } from "@lens-protocol/react-web";
+  Comment,
+  publicationId,
+  usePublications,
+} from "@lens-protocol/react-web";
 import { useEffect, useRef, useState } from "react";
 import Loader from "./loader";
 import PublicationCard from "./publication-card";
 
-export default function ExplorePublications() {
-  const { data, hasMore, next, error, loading } = useExplorePublications({
+export default function Comments({ commentOn }: { commentOn: string }) {
+  const { data, hasMore, next, error, loading } = usePublications({
     where: {
-      publicationTypes: [ExplorePublicationType.Post],
-      since: Math.floor(Date.now() / 1000) - 86400,
+      commentOn: {
+        id: publicationId(commentOn),
+      },
     },
-    orderBy: ExplorePublicationsOrderByType.TopReacted,
     limit: LimitType.TwentyFive,
   });
 
@@ -52,8 +51,8 @@ export default function ExplorePublications() {
     <div ref={scrollContainerRef} style={{ height: "100vh", overflow: "auto" }}>
       <ul>
         {data?.map((publication, index) => (
-          <li key={publication.id} className="w-[400px]">
-            <PublicationCard publication={publication as Post} />
+          <li key={publication.id}>
+            <PublicationCard publication={publication as Comment} />
             <Separator />
           </li>
         ))}

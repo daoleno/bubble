@@ -1,5 +1,5 @@
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
-import { Post } from "@lens-protocol/react-web";
+import { Comment, Post } from "@lens-protocol/react-web";
 import {
   HeartIcon,
   MessageCircleIcon,
@@ -7,15 +7,16 @@ import {
   SquircleIcon,
 } from "lucide-react";
 import { useState } from "react";
+import { Link } from "react-router-dom";
 import * as timeago from "timeago.js";
 
 export default function PublicationCard({
   publication,
 }: {
-  publication: Post;
+  publication: Post | Comment;
 }) {
   const [showMore, setShowMore] = useState(false);
-  const contentLengthThreshold = 100;
+  const contentLengthThreshold = 150;
   const content = (publication?.metadata as any).content;
   const shortContent = `${content.substring(0, contentLengthThreshold)}...`;
   const formattedDate = timeago.format(publication.createdAt);
@@ -23,13 +24,6 @@ export default function PublicationCard({
   const toggleShowMore = () => {
     setShowMore(!showMore);
   };
-
-  // const navigate = useNavigate();
-
-  // const handleCommentClick = (postId: string) => {
-  //   console.log("postId", postId);
-  //   navigate(`/comments/${postId}`);
-  // };
 
   return (
     <div className="p-4 w-full">
@@ -57,18 +51,22 @@ export default function PublicationCard({
             </div>
             <p className="text-xs text-gray-500">{formattedDate}</p>
           </div>
-          <p className="text-sm text-gray-700">
-            {showMore
-              ? content
-              : content.length > contentLengthThreshold
-              ? shortContent
-              : content}
-          </p>
-          {content.length > contentLengthThreshold && (
-            <button className="text-blue-500" onClick={toggleShowMore}>
-              {showMore ? "Show less" : "Show more"}
-            </button>
-          )}
+          <div className="hover:bg-gray-100 rounded-lg p-2 mt-2 hover:cursor-pointer">
+            <Link to={`/publication/${publication.id}`}>
+              <p className="text-sm text-gray-700">
+                {showMore
+                  ? content
+                  : content.length > contentLengthThreshold
+                  ? shortContent
+                  : content}
+              </p>
+            </Link>
+            {content.length > contentLengthThreshold && (
+              <button className="text-blue-500" onClick={toggleShowMore}>
+                {showMore ? "Show less" : "Show more"}
+              </button>
+            )}
+          </div>
           {/* {mediaSrc && (
             <img
               className="rounded-lg w-full mb-2"
@@ -82,10 +80,7 @@ export default function PublicationCard({
             />
           )} */}
           <div className="flex gap-7 mt-3">
-            <div
-              className="flex items-center gap-1"
-              // onClick={handleCommentClick}
-            >
+            <div className="flex items-center gap-1">
               <MessageCircleIcon className="w-4 h-4" />
               <span className="ml-1">{publication.stats.comments}</span>
             </div>
