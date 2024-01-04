@@ -1,24 +1,18 @@
 import { Separator } from "@/components/ui/separator";
-import {
-  ExplorePublicationType,
-  ExplorePublicationsOrderByType,
-  LimitType,
-  useExplorePublications,
-} from "@lens-protocol/react";
-import { Post } from "@lens-protocol/react-web";
+import { FeedEventItemType, Post, useFeed } from "@lens-protocol/react-web";
 import { useEffect, useRef, useState } from "react";
 import Loader from "./loader";
 import PublicationCard from "./publication-card";
 
-export default function ExplorePublications() {
-  const { data, hasMore, next, error, loading } = useExplorePublications({
+export default function Feed({ profileId }: { profileId: string }) {
+  const { data, hasMore, next, error, loading } = useFeed({
     where: {
-      publicationTypes: [ExplorePublicationType.Post],
-      since: Math.floor(Date.now() / 1000) - 86400,
+      for: profileId as any,
+      feedEventItemTypes: [FeedEventItemType.Post],
     },
-    orderBy: ExplorePublicationsOrderByType.TopReacted,
-    limit: LimitType.TwentyFive,
   });
+
+  console.log("####", data);
 
   const [fetchingMore, setFetchingMore] = useState(false);
   const scrollContainerRef = useRef();
@@ -50,11 +44,11 @@ export default function ExplorePublications() {
 
   return (
     <div ref={scrollContainerRef} style={{ height: "100vh", overflow: "auto" }}>
-      <h1 className="text-xl font-bold mx-3">Trending</h1>
+      <h1 className="text-xl font-bold mx-3">Feed</h1>
       <ul>
-        {data?.map((publication, index) => (
-          <li key={publication.id} className="w-[400px]">
-            <PublicationCard publication={publication as Post} />
+        {data?.map((item, index) => (
+          <li key={item.id} className="w-[400px]">
+            <PublicationCard publication={item.root as Post} />
             <Separator />
           </li>
         ))}
