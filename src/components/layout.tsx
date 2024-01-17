@@ -12,7 +12,6 @@ import { Avatar } from "./ui/avatar";
 
 export default function Layout({ children }: { children: React.ReactNode }) {
   const { data } = useSession();
-  console.log("data", data);
   const authenticated = data?.authenticated;
   const { execute: logout } = useLogout();
   const handleLogout = async () => {
@@ -27,7 +26,7 @@ export default function Layout({ children }: { children: React.ReactNode }) {
     <main className="w-[450px] min-h-screen mx-auto">
       <div className="flex items-center justify-center">
         <div className="absolute left-0 px-3">
-          <img src="/icons/icon.png" className="w-5 h-5" alt="bubble" />
+          <img src="assets/icon.png" className="w-5 h-5" alt="bubble" />
         </div>
         <Link className="text-2xl font-bold" to="/">
           Bubble
