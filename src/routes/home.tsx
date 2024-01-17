@@ -5,7 +5,7 @@ import { useSession } from "@lens-protocol/react-web";
 import { PlusIcon } from "lucide-react";
 import { Link } from "react-router-dom";
 
-function App() {
+function Home() {
   const { data } = useSession();
   const authenticated = data?.authenticated;
   const profileId = (data as any)?.profile?.id;
@@ -31,4 +31,4 @@ function App() {
   );
 }
 
-export default App;
+export default Home;
