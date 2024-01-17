@@ -3,9 +3,9 @@ import {
   ExplorePublicationType,
   ExplorePublicationsOrderByType,
   LimitType,
+  Post,
   useExplorePublications,
-} from "@lens-protocol/react";
-import { Post } from "@lens-protocol/react-web";
+} from "@lens-protocol/react-web";
 import { useEffect, useRef, useState } from "react";
 import Loader from "./loader";
 import PublicationCard from "./publication-card";
@@ -37,7 +37,7 @@ export default function ExplorePublications() {
       }
     };
 
-    let element = scrollContainerRef.current;
+    const element = scrollContainerRef.current;
     if (element) {
       element.addEventListener("scroll", handleScroll);
       return () => {

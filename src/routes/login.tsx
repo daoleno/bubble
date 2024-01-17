@@ -11,9 +11,7 @@ import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { useAccount } from "wagmi";
 
-type LoginProps = {};
-
-const Login: React.FC<LoginProps> = () => {
+const Login: React.FC = () => {
   const { address, connector, isConnected } = useAccount();
   const { execute: fetchProfile } = useLazyProfile();
   const { data, loading, error } = useOwnedHandles({

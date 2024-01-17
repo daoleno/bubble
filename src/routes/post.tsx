@@ -7,7 +7,7 @@ const Post: React.FC = () => {
   return (
     <Layout>
       <Plate>
-        <PlateContent placeholder="" />
+        <PlateContent placeholder="Bubble bubble..." />
       </Plate>
     </Layout>
   );

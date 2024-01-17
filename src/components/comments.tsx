@@ -1,7 +1,7 @@
 import { Separator } from "@/components/ui/separator";
-import { LimitType } from "@lens-protocol/react";
 import {
   Comment,
+  LimitType,
   publicationId,
   usePublications,
 } from "@lens-protocol/react-web";
@@ -36,7 +36,7 @@ export default function Comments({ commentOn }: { commentOn: string }) {
       }
     };
 
-    let element = scrollContainerRef.current;
+    const element = scrollContainerRef.current;
     if (element) {
       element.addEventListener("scroll", handleScroll);
       return () => {
