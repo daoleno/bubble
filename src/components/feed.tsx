@@ -43,7 +43,7 @@ export default function Feed({ profileId }: { profileId: string }) {
   if (error) return <p>Error: {error.message}</p>;
 
   return (
-    <div ref={scrollContainerRef} style={{ height: "100vh", overflow: "auto" }}>
+    <div ref={scrollContainerRef}>
       <h1 className="text-xl font-bold mx-3">Feed</h1>
       <ul>
         {data?.map((item, index) => (

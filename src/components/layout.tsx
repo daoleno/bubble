@@ -24,7 +24,7 @@ export default function Layout({ children }: { children: React.ReactNode }) {
   };
 
   return (
-    <main className="w-[400px] min-h-screen mx-auto">
+    <main className="w-[450px] min-h-screen mx-auto">
       <div className="flex items-center justify-center">
         <div className="absolute left-0 px-3">
           <img src="/icons/icon.png" className="w-5 h-5" alt="bubble" />

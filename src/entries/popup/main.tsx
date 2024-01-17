@@ -16,6 +16,7 @@ import Login from "./login";
 import Publication from "./publication";
 
 import { getDefaultWallets, RainbowKitProvider } from "@rainbow-me/rainbowkit";
+import Post from "./post";
 
 const { chains, publicClient, webSocketPublicClient } = configureChains(
   [polygon],
@@ -59,6 +60,10 @@ const router = createHashRouter([
   {
     path: "/login",
     element: <Login />,
+  },
+  {
+    path: "/post",
+    element: <Post />,
   },
 ]);
 
